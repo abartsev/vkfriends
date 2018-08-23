@@ -42,7 +42,7 @@ auth()
 })
 .then(friends => {
     const template = document.querySelector('#user-template').textContent;
-    const render = Handlebars.complite(template);
+    const render = Handlebars.compile(template);
     const html = render(friends);
     const results = document.querySelector('#results');
     results.innerHTML = html;
