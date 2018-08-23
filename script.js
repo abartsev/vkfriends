@@ -35,12 +35,16 @@ auth()
 })
 .then(([me]) => {
     const headerInfo = document.querySelector('#headerInfo');
-    headerInfo.textContent - `Друзья на странице ${me.first_name} ${me.last_name}`;
+    headerInfo.textContent = `Друзья на странице ${me.first_name} ${me.last_name}`;
 
     return callAPI('friends.get', {fields: 'city, country, photo_100'});
     
 })
 .then(friends => {
-    console.log(friends);
+    const template = document.querySelector('#user-template').textContent;
+    const render = Handlebars.complite(template);
+    const html = render(friends);
+    const results = document.querySelector('#results');
+    results.innerHTML = html;
     
 });
