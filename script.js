@@ -35,7 +35,7 @@ function callAPI(method, params) {
         const [me] = await callAPI('users.get', {name_case: 'gen'});
         const headerInfo = document.querySelector('#headerInfo');
 
-        headerInfo.textContent = `Друзья на странице ${me.first_name} ${me.last_name}`;
+        headerInfo.textContent = `Выберите друзей`;
 
         const friends = await callAPI('friends.get', {fields: 'city, country, photo_100'});
         const template = document.querySelector('#user-template').textContent;
