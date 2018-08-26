@@ -30,40 +30,59 @@
             color: #fff;
             font-family: FANTASY;
         }
-        #results{}
-        .target{
-
-
+        .dndblock {
+            overflow: hidden;
+            height: 570px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #results {
+            width: 50%;
+            overflow: auto;
+        }
+        .target {
+            width: 50%;
+            overflow: auto;
         }
         .friends{
 
         }
-        .friend{
-
+        .friend {
+            display: flex;
+            align-items: center;
+            padding: 4px 10px;
+        }
+        .friend img {
+            border-radius: 50px;
+            width: 66px;
+            margin-right: 15px;
         }
         .bottomPanel {
-    background: #eee;
-    padding: 15px 10px;
-}
-.bottomPanel::after{
-    content: "";
-    clear: both;
+            background: #eee;
+            padding: 15px 10px;
+        }
+        .bottomPanel::after{
+            content: "";
+            clear: both;
 
-}
+        }
         button.save {
-    float: right;
-    background: #ff8663;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    border-radius: 11px;
-}
+            float: right;
+            background: #ff8663;
+            color: #fff;
+            border: none;
+            padding: 10px 10px;
+            border-radius: 11px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div id="headerInfo"></div>
-    <div class="panel"><input type="text" name="find"><input type="text" name="newfind"></div>
+    <div class="panel">
+        <input type="text" name="find" placeholder="Начните вводить имя друга">
+        <input type="text" name="newfind" placeholder="название">
+    </div>
     <div class="dndblock"> 
         <div id="results">
             
