@@ -49,3 +49,38 @@ function callAPI(method, params) {
         console.error(e);    
     }
 })();
+
+const source = document.querySelector('#results');
+const target = document.querySelector('.target');
+
+
+makeDnD([source, target]);
+function makeDnD(zones) {
+    let currentDrag;
+
+    zones.forEach(zone => {
+        zone.addEventListener('dragstart', (e) => {
+            currentDrag = { source: zone, node: e.target };
+        });
+
+        zone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        zone.addEventListener('drop', (e) => {
+            if (currentDrag) {
+                e.preventDefault();
+
+                if (currentDrag.source !== zone) {
+                    if (e.target.classList.contains('item')) {
+                        zone.insertBefore(currentDrag.node, e.target.nextElementSibling);
+                    } else {
+                        zone.insertBefore(currentDrag.node, zone.lastElementChild);
+                    }
+                }
+
+                currentDrag = null;
+            }
+        });
+    })
+}
