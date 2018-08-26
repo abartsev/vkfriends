@@ -65,15 +65,19 @@
             display: flex;
             align-items: center;
             padding: 4px 10px;
+            cursor: pointer;
         }
         .friend img {
             border-radius: 50px;
             width: 66px;
             margin-right: 15px;
         }
+        .friend:hover{
+            background: #eee;
+        }
         .bottomPanel {
             background: #eee;
-            padding: 15px 10px;
+            padding: 5px 10px;
         }
         .bottomPanel::after{
             content: "";
@@ -86,7 +90,7 @@
             background: #ff8663;
             color: #fff;
             border: none;
-            padding: 10px 10px;
+            padding: 5px 10px;
             border-radius: 11px;
         }
     </style>
@@ -115,6 +119,7 @@
         <div class="friend">
             <img src="{{photo_100}}" />
             <div>{{first_name}} {{last_name}}</div>
+            <div class="plus">+</div>
         </div>
         {{/each}}
     </div>
