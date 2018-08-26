@@ -23,6 +23,8 @@
             left: 0;
             right: 0;
             border-radius: 15px;
+            background: #eee;
+            border: 2px solid #eee;
         }
         #headerInfo {
             padding: 20px 10px;
@@ -30,19 +32,31 @@
             color: #fff;
             font-family: FANTASY;
         }
+        .panel {
+            padding: 10px 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .panel input {
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 2px 10px;
+        }
         .dndblock {
             overflow: hidden;
-            height: 570px;
+            height: 560px;
             display: flex;
             justify-content: space-between;
         }
         #results {
             width: 50%;
             overflow: auto;
+            background: #fff;
         }
         .target {
             width: 50%;
             overflow: auto;
+            background: #fff;
         }
         .friends{
 
@@ -64,7 +78,8 @@
         .bottomPanel::after{
             content: "";
             clear: both;
-
+            position: relative;
+            display: block;
         }
         button.save {
             float: right;
