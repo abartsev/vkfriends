@@ -85,16 +85,12 @@ function makeDnD(zones) {
 }
 
 window.onload = () => {
-    const promise = new Promise ((resolve)=>{
+    setTimeout(()=>{
         const zone_plus = document.querySelector('.zone_plus');
-        resolve(zone_plus);
         
-    }) 
-
-    promise.then((resul) => {
-        resul.addEventListener('click', (e) => {
+        zone_plus.addEventListener('click', (e) => {
             console.log(e);
         })
-    })
-    
+    }, 3000) 
 };
+
