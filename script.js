@@ -52,6 +52,7 @@ function callAPI(method, params) {
 
 const source = document.querySelector('#results');
 const target = document.querySelector('.target');
+const plus = document.querySelector('.plus');
 
 
 makeDnD([source, target]);
@@ -84,3 +85,7 @@ function makeDnD(zones) {
         });
     })
 }
+
+plus.addEventListener('click', (e) => {
+    console.log(e);
+})

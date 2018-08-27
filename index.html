@@ -66,11 +66,13 @@
             align-items: center;
             padding: 4px 10px;
             cursor: pointer;
+            position: relative;
         }
         .friend img {
             border-radius: 50px;
             width: 66px;
             margin-right: 15px;
+            pointer-events: none;
         }
         .friend:hover{
             background: #eee;
@@ -92,6 +94,14 @@
             border: none;
             padding: 5px 10px;
             border-radius: 11px;
+        }
+        .plus {
+            position: absolute;
+            right: 30px;
+            font-size: 23px;
+            font-weight: bold;
+            font-family: sans-serif;
+            color: #a8a8a8;
         }
     </style>
 </head>
