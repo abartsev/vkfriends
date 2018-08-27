@@ -90,9 +90,11 @@ window.onload = () => {
         resolve(zone_plus);
         
     }) 
-};
-promise.then((resul) => {
-    resul.addEventListener('click', (e) => {
-        console.log(e);
+
+    promise.then((resul) => {
+        resul.addEventListener('click', (e) => {
+            console.log(e);
+        })
     })
-})
+    
+};
