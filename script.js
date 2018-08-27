@@ -83,11 +83,14 @@ function makeDnD(zones) {
         });
     })
 }
+
 window.onload = () => {
-    const zone_plus = document.querySelector('.zone_plus');
-    
-    zone_plus.addEventListener('click', (e) => {
-        console.log(e);
-    })
+    setTimeout(()=>{
+        const zone_plus = document.querySelector('.zone_plus');
+        
+        zone_plus.addEventListener('click', (e) => {
+            console.log(e);
+        })
+    }, 3000) 
 };
 
