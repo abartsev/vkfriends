@@ -84,7 +84,7 @@ function makeDnD(zones) {
     })
 }
 document.addEventListener('DOMContentLoaded', () => {
-    const plus = document.querySelector('.zone_plus');
+    const zone_plus = document.querySelector('.zone_plus');
     zone_plus.addEventListener('click', (e) => {
         console.log(e);
     })
