@@ -52,7 +52,7 @@ function callAPI(method, params) {
 
 const source = document.querySelector('#results');
 const target = document.querySelector('.target');
-const zone_plus = document.querySelector('.zone_plus');
+const zone_plus = document.querySelectorAll('.zone_plus');
 
 
 makeDnD([source, target]);
