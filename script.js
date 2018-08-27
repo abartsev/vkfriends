@@ -50,7 +50,7 @@ function callAPI(method, params) {
     }
 })();
 
-const source = document.querySelector('.friends');
+const source = document.querySelector('#results');
 const target = document.querySelector('.target');
 
 
