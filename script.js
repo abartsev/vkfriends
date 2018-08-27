@@ -83,12 +83,11 @@ function makeDnD(zones) {
         });
     })
 }
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = () => {
     const zone_plus = document.querySelector('.zone_plus');
-    console.log(zone_plus);
     
     zone_plus.addEventListener('click', (e) => {
         console.log(e);
     })
-});
+};
 
