@@ -87,6 +87,6 @@ function makeDnD(zones) {
 }
 console.log(plus);
 
-plus.addEventListener('click', (e) => {
-    console.log(e);
-})
+// plus.addEventListener('click', (e) => {
+//     console.log(e);
+// })
