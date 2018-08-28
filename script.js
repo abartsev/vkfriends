@@ -44,12 +44,6 @@ function callAPI(method, params) {
         const results = document.querySelector('#results');
         results.innerHTML = html;
         const zone_plus = document.querySelector('.zone_plus');
-        
-        zone_plus.addEventListener('click', (e) => {
-            console.log(e.target.parentNode);
-            target.appendChild(e.target.parentNode);
-        })
-
     }
     catch (e){
         console.error(e);    
@@ -90,3 +84,7 @@ function makeDnD(zones) {
     })
 }
 
+zone_plus.addEventListener('click', (e) => {
+    console.log(e.target.parentNode);
+    target.appendChild(e.target.parentNode);
+})
