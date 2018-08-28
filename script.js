@@ -43,7 +43,7 @@ function callAPI(method, params) {
         const html = render(friends);
         const results = document.querySelector('#results');
         results.innerHTML = html;
-        const zone_plus = document.querySelector('.zone_plus');
+        
     }
     catch (e){
         console.error(e);    
@@ -83,8 +83,9 @@ function makeDnD(zones) {
         });
     })
 }
-
+const zone_plus = document.querySelector('.dndblock');
 zone_plus.addEventListener('click', (e) => {
-    console.log(e.target.parentNode);
-    target.appendChild(e.target.parentNode);
+
+    console.log(e.target);
+    //target.appendChild(e.target.parentNode);
 })
