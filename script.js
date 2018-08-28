@@ -42,8 +42,6 @@ function callAPI(method, params) {
         const render = Handlebars.compile(template);
         const html = render(friends);
         const results = document.querySelector('#results');
-        const friendsZone = document.querySelector('.friends');
-
         results.innerHTML = html;
         
     }
@@ -54,6 +52,7 @@ function callAPI(method, params) {
 
 const source = document.querySelector('#results');
 const target = document.querySelector('.target');
+const friendsZone = document.querySelector('.friends');
 
 makeDnD([source, target]);
 function makeDnD(zones) {
