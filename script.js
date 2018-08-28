@@ -89,7 +89,7 @@ window.onload = () => {
         const zone_plus = document.querySelector('.zone_plus');
         
         zone_plus.addEventListener('click', (e) => {
-            console.log(e.target.parentNode);
+            console.log(e.target.parentNode.parentNode);
             target.appendChild(e.target.parentNode);
         })
     }, 3000) 
