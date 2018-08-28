@@ -37,11 +37,13 @@ function callAPI(method, params) {
 
         headerInfo.textContent = `Выберите друзей`;
 
-        const friends = await callAPI('friends.get', {fields: 'city, country, photo_100'});
+        const friends = await callAPI('friends.get', {fields: 'photo_100'});
         const template = document.querySelector('#user-template').textContent;
         const render = Handlebars.compile(template);
         const html = render(friends);
         const results = document.querySelector('#results');
+        const friendsZone = document.querySelector('.friends');
+
         results.innerHTML = html;
         
     }
@@ -85,7 +87,11 @@ function makeDnD(zones) {
 }
 const zone_plus = document.querySelector('.dndblock');
 zone_plus.addEventListener('click', (e) => {
-
-    console.log(e.target);
-    //target.appendChild(e.target.parentNode);
+    if (e.target.className == "zone_plus") {
+        if (e.target.parentNode.parentNode.className == 'friends') {
+            target.appendChild(e.target.parentNode);
+        }else{
+            friendsZone.appendChild(e.target.parentNode);
+        }
+    }
 })
