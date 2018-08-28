@@ -66,6 +66,7 @@
             align-items: center;
             padding: 4px 10px;
             cursor: pointer;
+            position: relative;
         }
         .friend img {
             border-radius: 50px;
@@ -94,6 +95,21 @@
             padding: 5px 10px;
             border-radius: 11px;
         }
+        .zone_plus {
+            position: absolute;
+            right: 30px;
+            font-size: 23px;
+            font-weight: bold;
+            font-family: sans-serif;
+            color: #a8a8a8;
+        }
+        .target .zone_plus {
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
     </style>
 </head>
 <body>
@@ -120,7 +136,7 @@
         <div class="friend" draggable="true">
             <img src="{{photo_100}}" />
             <div>{{first_name}} {{last_name}}</div>
-            <div class="plus">+</div>
+            <div class="zone_plus">+</div>
         </div>
         {{/each}}
     </div>

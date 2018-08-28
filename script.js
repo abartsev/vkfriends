@@ -53,7 +53,6 @@ function callAPI(method, params) {
 const source = document.querySelector('#results');
 const target = document.querySelector('.target');
 
-
 makeDnD([source, target]);
 function makeDnD(zones) {
     let currentDrag;
@@ -84,3 +83,15 @@ function makeDnD(zones) {
         });
     })
 }
+
+window.onload = () => {
+    setTimeout(()=>{
+        const zone_plus = document.querySelector('.zone_plus');
+       
+    }, 3000) 
+    zone_plus.addEventListener('click', (e) => {
+        console.log(e.target.parentNode);
+        target.appendChild(e.target.parentNode);
+    })
+};
+
