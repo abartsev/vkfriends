@@ -37,13 +37,13 @@ function callAPI(method, params) {
 
         headerInfo.textContent = `Выберите друзей`;
 
-        const friends = await callAPI('friends.get', {fields: 'city, country, photo_100'});
+        const friends = await callAPI('friends.get', {fields: 'photo_100'});
         const template = document.querySelector('#user-template').textContent;
         const render = Handlebars.compile(template);
         const html = render(friends);
         const results = document.querySelector('#results');
         results.innerHTML = html;
-
+        
     }
     catch (e){
         console.error(e);    
@@ -83,15 +83,26 @@ function makeDnD(zones) {
         });
     })
 }
+const zone_plus = document.querySelector('.dndblock');
+const find = document.querySelector('.find');
+const newfind = document.querySelector('.newfind');
 
-window.onload = () => {
-    setTimeout(()=>{
-        const zone_plus = document.querySelector('.zone_plus');
-        
-        zone_plus.addEventListener('click', (e) => {
-            console.log(e.target.parentNode.parentNode);
+zone_plus.addEventListener('click', (e) => {
+    if (e.target.className == "zone_plus") {
+        if (e.target.parentNode.parentNode.className == 'friends') {
             target.appendChild(e.target.parentNode);
-        })
-    }, 3000) 
-};
+        }else{
+            const friendsZone = document.querySelector('.friends');
+            friendsZone.appendChild(e.target.parentNode);
+        }
+    }
+})
 
+find.addEventListener('keydown', (e) => {
+    const friendsZone = document.querySelector('.friends');
+    search(friendsZone, find.value);
+})
+
+function search(obj, value) {
+    
+}
