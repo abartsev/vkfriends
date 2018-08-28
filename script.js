@@ -84,6 +84,9 @@ function makeDnD(zones) {
     })
 }
 const zone_plus = document.querySelector('.dndblock');
+const find = document.querySelector('.find');
+const newfind = document.querySelector('.newfind');
+
 zone_plus.addEventListener('click', (e) => {
     if (e.target.className == "zone_plus") {
         if (e.target.parentNode.parentNode.className == 'friends') {
@@ -94,3 +97,12 @@ zone_plus.addEventListener('click', (e) => {
         }
     }
 })
+
+find.addEventListener('keydown', (e) => {
+    const friendsZone = document.querySelector('.friends');
+    search(friendsZone, find.value);
+})
+
+function search(obj, value) {
+    
+}
