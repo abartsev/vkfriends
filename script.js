@@ -52,7 +52,6 @@ function callAPI(method, params) {
 
 const source = document.querySelector('#results');
 const target = document.querySelector('.target');
-const friendsZone = document.querySelector('.friends');
 
 makeDnD([source, target]);
 function makeDnD(zones) {
@@ -90,6 +89,7 @@ zone_plus.addEventListener('click', (e) => {
         if (e.target.parentNode.parentNode.className == 'friends') {
             target.appendChild(e.target.parentNode);
         }else{
+            const friendsZone = document.querySelector('.friends');
             friendsZone.appendChild(e.target.parentNode);
         }
     }
