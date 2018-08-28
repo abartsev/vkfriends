@@ -87,11 +87,11 @@ function makeDnD(zones) {
 window.onload = () => {
     setTimeout(()=>{
         const zone_plus = document.querySelector('.zone_plus');
-       
+        
+        zone_plus.addEventListener('click', (e) => {
+            console.log(e.target.parentNode);
+            target.appendChild(e.target.parentNode);
+        })
     }, 3000) 
-    zone_plus.addEventListener('click', (e) => {
-        console.log(e.target.parentNode);
-        target.appendChild(e.target.parentNode);
-    })
 };
 
