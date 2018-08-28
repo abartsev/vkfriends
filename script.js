@@ -43,6 +43,12 @@ function callAPI(method, params) {
         const html = render(friends);
         const results = document.querySelector('#results');
         results.innerHTML = html;
+        const zone_plus = document.querySelector('.zone_plus');
+        
+        zone_plus.addEventListener('click', (e) => {
+            console.log(e.target.parentNode);
+            target.appendChild(e.target.parentNode);
+        })
 
     }
     catch (e){
@@ -83,15 +89,4 @@ function makeDnD(zones) {
         });
     })
 }
-
-window.onload = () => {
-    setTimeout(()=>{
-        const zone_plus = document.querySelector('.zone_plus');
-        
-        zone_plus.addEventListener('click', (e) => {
-            console.log(e.target.parentNode);
-            target.appendChild(e.target.parentNode);
-        })
-    }, 3000) 
-};
 
