@@ -37,18 +37,33 @@ function callAPI(method, params) {
 
         headerInfo.textContent = `Выберите друзей`;
 
-        const friends = await callAPI('friends.get', {fields: 'photo_100'});
-        const template = document.querySelector('#user-template').textContent;
-        const render = Handlebars.compile(template);
-        const html = render(friends);
-        const results = document.querySelector('#results');
-        results.innerHTML = html;
-        
+        const friends = await callAPI('friends.get', {fields: 'photo_100', count: "30"});
+
+        localStorage.friend = JSON.stringify(friends);
+       
+        renders(JSON.parse(localStorage.friend));
+        if (localStorage.friend) {
+            renders(JSON.parse(localStorage.friend));
+        } else {
+            renders(friends); 
+        }
     }
     catch (e){
         console.error(e);    
     }
 })();
+//вывод элементов на страницу
+    function renders(obj){
+console.log(obj);
+
+            const template = document.querySelector('#user-template').textContent;
+            const render = Handlebars.compile(template);
+    
+            const html = render(obj);
+            const results = document.querySelector('#results');
+            results.innerHTML = html;           
+  
+    }
 
 const source = document.querySelector('#results');
 const target = document.querySelector('.target');
@@ -87,6 +102,7 @@ const zone_plus = document.querySelector('.dndblock');
 const find = document.querySelector('.find');
 const newfind = document.querySelector('.newfind');
 
+//переброс пользователей по клику
 zone_plus.addEventListener('click', (e) => {
     if (e.target.className == "zone_plus") {
         if (e.target.parentNode.parentNode.className == 'friends') {
@@ -98,11 +114,73 @@ zone_plus.addEventListener('click', (e) => {
     }
 })
 
-find.addEventListener('keydown', (e) => {
-    const friendsZone = document.querySelector('.friends');
-    search(friendsZone, find.value);
+// событие левого инпута
+find.addEventListener('keyup', () => {
+    const leftFriends = document.querySelector('.friends');
+    
+    search(leftFriends, find.value);
 })
 
-function search(obj, value) {
+// событие правого инпута
+newfind.addEventListener('keyup', () => {
+    const rightFriends = document.querySelector('.target');
     
+    search(rightFriends, newfind.value);
+})
+
+//перебор елементов в зоне при вводе в инпут
+function search(obj, valueInput) {
+    let frendObj = obj.childNodes;
+
+    [...frendObj].reduce((result, curent) => {
+        if (curent.nodeType !== 3) {
+            const answer = compare(curent.childNodes[3].innerHTML, valueInput);
+
+            if (answer) {
+                curent.style.display = "flex";
+            } else {
+                curent.style.display = "none";
+            }
+        } 
+        
+        return result;
+    }, {});
+}
+//поиск совпадение по имени и фамилии
+function compare(elem1, elem2) {
+    return (elem1.toLowerCase().indexOf(elem2.toLowerCase()) == -1 ) ? false : true;
+}
+
+const btnsave = document.querySelector('.save');
+
+btnsave.addEventListener('click', (e) => {
+    e.preventDefault;
+    const rightFriends = document.querySelector('.target');
+    const leftFriends = document.querySelector('.friends');
+
+    var a = assembly(rightFriends);
+    console.log(a);
+    
+})
+
+function assembly(obj) {
+    let frendObj = obj.childNodes;
+    var count = 0;
+    const newObj = [...frendObj].reduce((result, curent) => {
+        if (curent.nodeType !== 3) {
+            const [first_name, last_name] = curent.childNodes[3].innerHTML.split(' ');
+            console.log(curent.childNodes);
+            console.log(first_name);
+
+            console.log(last_name);
+
+            
+            result.first_name = first_name;
+            result.last_name = last_name;
+            result.photo_100 = curent.childNodes[1].src;
+        } 
+        count++;
+        return  result;
+    }, {});
+ return newObj;
 }
