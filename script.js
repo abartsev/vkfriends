@@ -53,12 +53,33 @@ function callAPI(method, params) {
 })();
 //вывод элементов на страницу
     function renders(obj){
-        const template = document.querySelector('#user-template').textContent;
-        const render = Handlebars.compile(template);
+        if (localStorage.newFriend1) {
+            const template = document.querySelector('#user-template').textContent;
+            const render = Handlebars.compile(template);
 
-        const html = render(obj);
-        const results = document.querySelector('#results');
-        results.innerHTML = html;            
+            const html = render(JSON.parse(localStorage.newFriend1));
+            const results = document.querySelector('#results');
+            results.innerHTML = html;
+
+            if (localStorage.newFriend0){
+                const template = document.querySelector('#user-templatenew').textContent;
+                const render = Handlebars.compile(template);
+    
+                const html = render(JSON.parse(localStorage.newFriend0));
+                const target = document.querySelector('.target');
+                target.innerHTML = html;
+            }
+            
+        } else {
+            const template = document.querySelector('#user-template').textContent;
+            const render = Handlebars.compile(template);
+
+            const html = render(obj);
+            const results = document.querySelector('#results');
+            results.innerHTML = html;
+        }
+
+                    
     }
 
 const source = document.querySelector('#results');
@@ -164,19 +185,19 @@ function assembly(obj) {
     let frendObj = obj.childNodes;
     const localFriends = JSON.parse(localStorage.friend);
     const newObj = {};
-    let count = 0;
-    newObj.items = [...frendObj].reduce((result, curent) => {
+    newObj.items = [...frendObj].reduce((result, curent, index) => {
         if (curent.nodeType !== 3) {
             for (const key in localFriends.items) {
-                if (localFriends.items.hasOwnProperty(key)) {                    
+                if (localFriends.items.hasOwnProperty(key)) { 
+                                     
                     if (curent.getAttribute('id') == localFriends.items[key].id) {
-                        result[count] = localFriends.items[key];
+                        result[index] = localFriends.items[key];
+                        break;
                     }
                 }
             }           
         }
-        count++;
         return  result;
-    }, []);
+    }, {});
  return newObj;
 }
