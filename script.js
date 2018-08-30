@@ -37,13 +37,26 @@ function callAPI(method, params) {
 
         headerInfo.textContent = `Выберите друзей`;
 
-        const friends = await callAPI('friends.get', {fields: 'photo_100'});
+        const friends = await callAPI('friends.get', {fields: 'photo_100', count: 30});
         const template = document.querySelector('#user-template').textContent;
+        localStorage.friend = JSON.stringify(friends);
         const render = Handlebars.compile(template);
-        const html = render(friends);
-        const results = document.querySelector('#results');
-        results.innerHTML = html;
-        
+
+        if (localStorage.friend) {
+            filtration(JSON.parse(localStorage.friend));
+        } else {
+            const html = render(friends);
+            const results = document.querySelector('#results');
+            results.innerHTML = html;
+        }
+            
+
+        function filtration(params) {
+            const html = render(params);
+            const results = document.querySelector('#results');
+            results.innerHTML = html;
+        }
+ 
     }
     catch (e){
         console.error(e);    
