@@ -37,31 +37,29 @@ function callAPI(method, params) {
 
         headerInfo.textContent = `Выберите друзей`;
 
-        const friends = await callAPI('friends.get', {fields: 'photo_100', count: 30});
-        const template = document.querySelector('#user-template').textContent;
+        const friends = await callAPI('friends.get', {fields: 'photo_100', count: "30"});
+
         localStorage.friend = JSON.stringify(friends);
-        const render = Handlebars.compile(template);
 
         if (localStorage.friend) {
-            filtration(JSON.parse(localStorage.friend));
+            renders(JSON.parse(localStorage.friend));
         } else {
-            const html = render(friends);
-            const results = document.querySelector('#results');
-            results.innerHTML = html;
+            renders(friends); 
         }
-            
-
-        function filtration(params) {
-            const html = render(params);
-            const results = document.querySelector('#results');
-            results.innerHTML = html;
-        }
- 
     }
     catch (e){
         console.error(e);    
     }
 })();
+//вывод элементов на страницу
+    function renders(obj){
+        const template = document.querySelector('#user-template').textContent;
+        const render = Handlebars.compile(template);
+
+        const html = render(obj);
+        const results = document.querySelector('#results');
+        results.innerHTML = html;            
+    }
 
 const source = document.querySelector('#results');
 const target = document.querySelector('.target');
@@ -100,6 +98,7 @@ const zone_plus = document.querySelector('.dndblock');
 const find = document.querySelector('.find');
 const newfind = document.querySelector('.newfind');
 
+//переброс пользователей по клику
 zone_plus.addEventListener('click', (e) => {
     if (e.target.className == "zone_plus") {
         if (e.target.parentNode.parentNode.className == 'friends') {
@@ -111,11 +110,73 @@ zone_plus.addEventListener('click', (e) => {
     }
 })
 
-find.addEventListener('keydown', (e) => {
-    const friendsZone = document.querySelector('.friends');
-    search(friendsZone, find.value);
+// событие левого инпута
+find.addEventListener('keyup', () => {
+    const leftFriends = document.querySelector('.friends');
+    
+    search(leftFriends, find.value);
 })
 
-function search(obj, value) {
+// событие правого инпута
+newfind.addEventListener('keyup', () => {
+    const rightFriends = document.querySelector('.target');
     
+    search(rightFriends, newfind.value);
+})
+
+//перебор елементов в зоне при вводе в инпут
+function search(obj, valueInput) {
+    let frendObj = obj.childNodes;
+
+    [...frendObj].reduce((result, curent) => {
+        if (curent.nodeType !== 3) {
+            const answer = compare(curent.childNodes[3].innerHTML, valueInput);
+
+            if (answer) {
+                curent.style.display = "flex";
+            } else {
+                curent.style.display = "none";
+            }
+        } 
+        
+        return result;
+    }, {});
+}
+//поиск совпадение по имени и фамилии
+function compare(elem1, elem2) {
+    return (elem1.toLowerCase().indexOf(elem2.toLowerCase()) == -1 ) ? false : true;
+}
+
+const btnsave = document.querySelector('.save');
+
+btnsave.addEventListener('click', (e) => {
+    e.preventDefault;
+    const Friends = [];
+    Friends[0] = document.querySelector('.target');
+    Friends[1] = document.querySelector('.friends');
+     for (let i = 0; i < 2; i++) {
+        localStorage.setItem("newFriend"+i, JSON.stringify(assembly(Friends[i])));      
+     }
+    
+})
+
+function assembly(obj) {
+    let frendObj = obj.childNodes;
+    const localFriends = JSON.parse(localStorage.friend);
+    const newObj = {};
+    let count = 0;
+    newObj.items = [...frendObj].reduce((result, curent) => {
+        if (curent.nodeType !== 3) {
+            for (const key in localFriends.items) {
+                if (localFriends.items.hasOwnProperty(key)) {                    
+                    if (curent.getAttribute('id') == localFriends.items[key].id) {
+                        result[count] = localFriends.items[key];
+                    }
+                }
+            }           
+        }
+        count++;
+        return  result;
+    }, []);
+ return newObj;
 }

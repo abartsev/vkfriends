@@ -133,13 +133,22 @@
 <script id="user-template" type="text/x-handlebars-template">
     <div class="friends">
         {{#each items}}
-        <div class="friend" draggable="true">
+        <div class="friend" id="{{id}}" draggable="true">
             <img src="{{photo_100}}" />
             <div>{{first_name}} {{last_name}}</div>
             <div class="zone_plus">+</div>
         </div>
         {{/each}}
     </div>
+</script>
+<script id="user-templatenew" type="text/x-handlebars-template">
+        {{#each items}}
+        <div class="friend" id="{{id}}" draggable="true">
+            <img src="{{photo_100}}" />
+            <div>{{first_name}} {{last_name}}</div>
+            <div class="zone_plus">+</div>
+        </div>
+        {{/each}}
 </script>
 <script src="./script.js"></script>   
 </body>
