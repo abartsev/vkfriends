@@ -66,7 +66,7 @@ function callAPI(method, params) {
                 const render = Handlebars.compile(template);
     
                 const html = render(JSON.parse(localStorage.newFriend0));
-                const target = document.querySelector('.target');
+                const target = document.querySelector('#target');
                 target.innerHTML = html;
             }
             
@@ -83,7 +83,11 @@ function callAPI(method, params) {
     }
 
 const source = document.querySelector('#results');
-const target = document.querySelector('.target');
+const target = document.querySelector('#target');
+const zone_plus = document.querySelector('.dndblock');
+const find = document.querySelector('.find');
+const newfind = document.querySelector('.newfind');
+const btnsave = document.querySelector('.save');
 
 makeDnD([source, target]);
 function makeDnD(zones) {
@@ -101,12 +105,27 @@ function makeDnD(zones) {
         zone.addEventListener('drop', (e) => {
             if (currentDrag) {
                 e.preventDefault();
-
                 if (currentDrag.source !== zone) {
-                    if (e.target.classList.contains('item')) {
+                    if (e.target.classList.contains('item')) {    
                         zone.insertBefore(currentDrag.node, e.target.nextElementSibling);
                     } else {
                         zone.insertBefore(currentDrag.node, zone.lastElementChild);
+                        if (zone.getAttribute('id') == "results") { 
+                            const answer = compare(currentDrag.node.childNodes[3].innerHTML, find.value);
+                            if (answer) {
+                                currentDrag.node.style.display = "flex";
+                            } else {
+                                currentDrag.node.style.display = "none";
+                            }
+                        }
+                        if (zone.getAttribute('id') == "target") {
+                            const answer = compare(currentDrag.node.childNodes[3].innerHTML, newfind.value);
+                            if (answer) {
+                                currentDrag.node.style.display = "flex";
+                            } else {
+                                currentDrag.node.style.display = "none";
+                            }
+                        }
                     }
                 }
 
@@ -115,32 +134,39 @@ function makeDnD(zones) {
         });
     })
 }
-const zone_plus = document.querySelector('.dndblock');
-const find = document.querySelector('.find');
-const newfind = document.querySelector('.newfind');
-
 //переброс пользователей по клику
 zone_plus.addEventListener('click', (e) => {
     if (e.target.className == "zone_plus") {
-        if (e.target.parentNode.parentNode.className == 'friends') {
+        if (e.target.parentNode.parentNode.getAttribute('id') == 'results') {
             target.appendChild(e.target.parentNode);
+            const answer = compare(e.target.parentNode.childNodes[3].innerHTML, newfind.value);
+                if (answer) {
+                    e.target.parentNode.style.display = "flex";
+                } else {
+                    e.target.parentNode.style.display = "none";
+                }
         }else{
-            const friendsZone = document.querySelector('.friends');
-            friendsZone.appendChild(e.target.parentNode);
+            source.appendChild(e.target.parentNode);
+            const answer = compare(e.target.parentNode.childNodes[3].innerHTML, find.value);
+                if (answer) {
+                    e.target.parentNode.style.display = "flex";
+                } else {
+                    e.target.parentNode.style.display = "none";
+                }
         }
     }
 })
 
 // событие левого инпута
 find.addEventListener('keyup', () => {
-    const leftFriends = document.querySelector('.friends');
+    const leftFriends = document.querySelector('#results');
     
     search(leftFriends, find.value);
 })
 
 // событие правого инпута
 newfind.addEventListener('keyup', () => {
-    const rightFriends = document.querySelector('.target');
+    const rightFriends = document.querySelector('#target');
     
     search(rightFriends, newfind.value);
 })
@@ -168,13 +194,11 @@ function compare(elem1, elem2) {
     return (elem1.toLowerCase().indexOf(elem2.toLowerCase()) == -1 ) ? false : true;
 }
 
-const btnsave = document.querySelector('.save');
-
 btnsave.addEventListener('click', (e) => {
     e.preventDefault;
     const Friends = [];
-    Friends[0] = document.querySelector('.target');
-    Friends[1] = document.querySelector('.friends');
+    Friends[0] = document.querySelector('#target');
+    Friends[1] = document.querySelector('#results');
      for (let i = 0; i < 2; i++) {
         localStorage.setItem("newFriend"+i, JSON.stringify(assembly(Friends[i])));      
      }

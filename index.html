@@ -53,7 +53,7 @@
             overflow: auto;
             background: #fff;
         }
-        .target {
+        #target {
             width: 50%;
             overflow: auto;
             background: #fff;
@@ -103,7 +103,7 @@
             font-family: sans-serif;
             color: #a8a8a8;
         }
-        .target .zone_plus {
+        #target .zone_plus {
     -o-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
@@ -123,7 +123,7 @@
         <div id="results">
             
         </div>
-        <div class="target">
+        <div id="target">
            
         </div>
     </div>
@@ -131,7 +131,6 @@
 </div>
 
 <script id="user-template" type="text/x-handlebars-template">
-    <div class="friends">
         {{#each items}}
         <div class="friend" id="{{id}}" draggable="true">
             <img src="{{photo_100}}" />
@@ -139,7 +138,7 @@
             <div class="zone_plus">+</div>
         </div>
         {{/each}}
-    </div>
+
 </script>
 <script id="user-templatenew" type="text/x-handlebars-template">
         {{#each items}}
